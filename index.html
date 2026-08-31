@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MZ1WXNFE0G"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-MZ1WXNFE0G');
+  const ANALYTICS_ENABLED = false;
+  if (ANALYTICS_ENABLED) {
+    const analyticsScript = document.createElement('script');
+    analyticsScript.async = true;
+    analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-MZ1WXNFE0G';
+    document.head.appendChild(analyticsScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MZ1WXNFE0G');
+  }
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,11 +41,14 @@
   body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 0%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 30rem),var(--bg);color:var(--ink);font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:clamp(24px,5vw,72px) 24px 28px}
   main{width:min(1120px,100%);margin:auto}
   .movie-strip{width:100vw;margin:calc(-1 * clamp(24px,5vw,72px)) 0 clamp(30px,4vw,54px) calc(50% - 50vw);overflow:hidden;background:#0d1411;border-bottom:1px solid rgba(255,255,255,.12)}
-  .movie-track{display:flex;width:max-content;animation:strip-roll 48s linear infinite;will-change:transform}
+  .movie-track{display:flex;width:max-content;animation:strip-roll 96s linear infinite;will-change:transform}
   .movie-group{display:flex;flex:none;gap:4px;padding-right:4px}
-  .movie-frame{display:block;flex:none;width:max(190px,25vw);aspect-ratio:4/3;object-fit:cover;filter:saturate(.9) contrast(1.04)}
+  .movie-sequence{flex:none;width:max(190px,25vw);margin:0;background:#0d1411;color:rgba(255,255,255,.72)}
+  .movie-sequence figcaption{height:30px;padding:7px 12px 0;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .movie-frame{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;filter:saturate(.9) contrast(1.04)}
   @keyframes strip-roll{to{transform:translateX(-50%)}}
-  .card{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(360px,.96fr);gap:clamp(36px,5vw,72px);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:clamp(36px,5vw,68px);box-shadow:var(--shadow)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:clamp(36px,5vw,68px);box-shadow:var(--shadow)}
+  .copy{max-width:780px}
   .eyebrow{margin:0 0 14px;color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
   h1{margin:0;font-size:clamp(38px,5vw,64px);line-height:1.02;letter-spacing:-.045em}
   .role{margin:14px 0 25px;font-size:clamp(17px,2vw,21px);line-height:1.45;color:var(--ink-soft)}
@@ -47,13 +56,9 @@
   .actions{display:flex;flex-wrap:wrap;gap:12px}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 20px;border-radius:11px;color:var(--ink);border:1px solid var(--line);font-size:14px;font-weight:600;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
   .btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.08)} .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)} .btn svg{width:16px;height:16px;flex:none}
-  .film{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:20px;background:#10251f;isolation:isolate}
-  .film video{width:100%;height:100%;display:block;object-fit:cover}
-  .film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 36%,rgba(5,15,11,.72));pointer-events:none}
-  .film-caption{position:absolute;z-index:1;left:24px;right:24px;bottom:22px;color:#fff}.film-caption span{display:block;margin-bottom:5px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.72}.film-caption strong{font-size:18px;line-height:1.35}
-  footer{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:20px;padding:0 10px;color:var(--ink-soft);font-size:12px}.counter{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none}.counter img{height:20px;width:auto}
-  @media (max-width:900px){body{padding-inline:20px}.card{grid-template-columns:1fr;padding:clamp(34px,7vw,58px)}.copy{max-width:690px}.film{aspect-ratio:16/9}}
-  @media (max-width:560px){body{padding:12px 12px 22px}.card{gap:30px;border-radius:20px;padding:30px 22px}h1{font-size:38px}.role{font-size:17px}.summary{font-size:15px;line-height:1.65}.actions{display:grid}.btn{width:100%}.film{border-radius:14px;aspect-ratio:4/3}.film-caption{left:18px;right:18px;bottom:17px}.film-caption strong{font-size:15px}footer{flex-direction:column;text-align:center;gap:10px}}
+  footer{text-align:center;margin-top:20px;padding:0 10px;color:var(--ink-soft);font-size:12px}
+  @media (max-width:900px){body{padding-inline:20px}.card{padding:clamp(34px,7vw,58px)}.copy{max-width:690px}}
+  @media (max-width:560px){body{padding:12px 12px 22px}.movie-strip{margin-top:-12px}.card{border-radius:20px;padding:30px 22px}h1{font-size:38px}.role{font-size:17px}.summary{font-size:15px;line-height:1.65}.actions{display:grid}.btn{width:100%}footer{flex-direction:column;text-align:center;gap:10px}}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.movie-track{animation:none}}
 </style>
 </head>
@@ -61,16 +66,24 @@
 <div class="movie-strip" aria-label="Moving film countdown">
   <div class="movie-track">
     <div class="movie-group">
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="0"><source src="countdown-strip.mp4" type="video/mp4"></video>
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="2.3"><source src="countdown-strip.mp4" type="video/mp4"></video>
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="4.6"><source src="countdown-strip.mp4" type="video/mp4"></video>
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="6.9"><source src="countdown-strip.mp4" type="video/mp4"></video>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ATLAS1.mp4" type="video/mp4"></video><figcaption>ATLAS particle detector</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ArDMfinal.mp4" type="video/mp4"></video><figcaption>ArDM experiment</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Cryo.mp4" type="video/mp4"></video><figcaption>Cryogenic systems</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/GasTurbine.mp4" type="video/mp4"></video><figcaption>Gas turbine technology</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/RhB.mp4" type="video/mp4"></video><figcaption>Rhaetian Railway</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Sun.mp4" type="video/mp4"></video><figcaption>Solar energy</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/TrainWheels.mp4" type="video/mp4"></video><figcaption>Rail-wheel dynamics</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/WindTurbine.mp4" type="video/mp4"></video><figcaption>Wind energy</figcaption></figure>
     </div>
     <div class="movie-group" aria-hidden="true">
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="0"><source src="countdown-strip.mp4" type="video/mp4"></video>
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="2.3"><source src="countdown-strip.mp4" type="video/mp4"></video>
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="4.6"><source src="countdown-strip.mp4" type="video/mp4"></video>
-      <video class="movie-frame" autoplay muted loop playsinline preload="metadata" data-offset="6.9"><source src="countdown-strip.mp4" type="video/mp4"></video>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ATLAS1.mp4" type="video/mp4"></video><figcaption>ATLAS particle detector</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ArDMfinal.mp4" type="video/mp4"></video><figcaption>ArDM experiment</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Cryo.mp4" type="video/mp4"></video><figcaption>Cryogenic systems</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/GasTurbine.mp4" type="video/mp4"></video><figcaption>Gas turbine technology</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/RhB.mp4" type="video/mp4"></video><figcaption>Rhaetian Railway</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Sun.mp4" type="video/mp4"></video><figcaption>Solar energy</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/TrainWheels.mp4" type="video/mp4"></video><figcaption>Rail-wheel dynamics</figcaption></figure>
+      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/WindTurbine.mp4" type="video/mp4"></video><figcaption>Wind energy</figcaption></figure>
     </div>
   </div>
 </div>
@@ -83,24 +96,16 @@
       <p class="summary">I connect advanced engineering, customer needs and commercial realities. From market insight and business cases to industrialisation and sales enablement, I turn uncertainty into clear choices, capable teams and sustainable growth.</p>
       <div class="actions">
         <a class="btn primary" href="Laffranchi_CV_LinkedIn.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download CV</a>
-        <a class="btn" href="Laffranchi_Motivation_Letter.pdf" target="_blank" rel="noopener">Read motivation letter</a>
+        <a class="btn primary" href="Laffranchi_Motivation_Letter.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download motivation letter</a>
         <a class="btn" href="https://www.linkedin.com/in/marco-laffranchi-604834204/" target="_blank" rel="noopener">LinkedIn profile</a>
       </div>
-    </div>
-    <div class="film">
-      <video autoplay muted loop playsinline preload="metadata" poster="og-image.png" aria-label="Placeholder for Marco Laffranchi's introduction video"><source src="intro-placeholder.mp4" type="video/mp4"></video>
-      <div class="film-caption"><span>Introduction film · placeholder</span><strong>A short personal introduction will appear here.</strong></div>
     </div>
   </section>
   <footer>
     <span>Marco Laffranchi · Winterthur, Switzerland</span>
-    <a class="counter" href="https://hits.sh/mlaffran.github.io/CV/" target="_blank" rel="noopener" aria-label="View public visitor statistics"><span>Page visits</span><img src="https://hits.sh/mlaffran.github.io/CV.svg?style=flat&amp;label=visits&amp;color=1f5c4a&amp;labelColor=59635e" alt="Visitor count"></a>
   </footer>
 </main>
 <script>
-  document.querySelectorAll('.movie-frame').forEach((video) => {
-    video.addEventListener('loadedmetadata', () => { video.currentTime = Number(video.dataset.offset); }, { once: true });
-  });
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('video').forEach((video) => { video.pause(); video.removeAttribute('autoplay'); });
   }
