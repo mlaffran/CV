@@ -44,8 +44,12 @@
   .movie-track{display:flex;width:max-content;animation:strip-roll 96s linear infinite;will-change:transform}
   .movie-group{display:flex;flex:none;gap:4px;padding-right:4px}
   .movie-sequence{flex:none;width:max(190px,25vw);margin:0;background:#0d1411;color:rgba(255,255,255,.72)}
-  .movie-sequence figcaption{height:30px;padding:7px 12px 0;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .movie-frame{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;filter:saturate(.9) contrast(1.04)}
+  .movie-stage{position:relative;width:100%;aspect-ratio:4/3;background:#0d1411;overflow:hidden}
+  .movie-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.04);opacity:0;transition:opacity 1s ease}
+  .movie-frame.is-active{opacity:1}
+  .movie-sequence figcaption{position:relative;height:30px;padding:7px 12px 0;text-align:center;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+  .caption-text{position:absolute;inset:7px 8px auto;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity 1s ease}
+  .caption-text.is-active{opacity:1}
   @keyframes strip-roll{to{transform:translateX(-50%)}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:clamp(36px,5vw,68px);box-shadow:var(--shadow)}
   .copy{max-width:780px}
@@ -66,24 +70,16 @@
 <div class="movie-strip" aria-label="Moving film countdown">
   <div class="movie-track">
     <div class="movie-group">
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ATLAS1.mp4" type="video/mp4"></video><figcaption>ATLAS particle detector</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ArDMfinal.mp4" type="video/mp4"></video><figcaption>ArDM experiment</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Cryo.mp4" type="video/mp4"></video><figcaption>Cryogenic systems</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/GasTurbine.mp4" type="video/mp4"></video><figcaption>Gas turbine technology</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/RhB.mp4" type="video/mp4"></video><figcaption>Rhaetian Railway</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Sun.mp4" type="video/mp4"></video><figcaption>Solar energy</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/TrainWheels.mp4" type="video/mp4"></video><figcaption>Rail-wheel dynamics</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/WindTurbine.mp4" type="video/mp4"></video><figcaption>Wind energy</figcaption></figure>
+      <figure class="movie-sequence" data-start="0"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
+      <figure class="movie-sequence" data-start="2"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
+      <figure class="movie-sequence" data-start="4"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
+      <figure class="movie-sequence" data-start="6"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
     </div>
     <div class="movie-group" aria-hidden="true">
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ATLAS1.mp4" type="video/mp4"></video><figcaption>ATLAS particle detector</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/ArDMfinal.mp4" type="video/mp4"></video><figcaption>ArDM experiment</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Cryo.mp4" type="video/mp4"></video><figcaption>Cryogenic systems</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/GasTurbine.mp4" type="video/mp4"></video><figcaption>Gas turbine technology</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/RhB.mp4" type="video/mp4"></video><figcaption>Rhaetian Railway</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/Sun.mp4" type="video/mp4"></video><figcaption>Solar energy</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/TrainWheels.mp4" type="video/mp4"></video><figcaption>Rail-wheel dynamics</figcaption></figure>
-      <figure class="movie-sequence"><video class="movie-frame" autoplay muted loop playsinline preload="metadata"><source src="strip-media/WindTurbine.mp4" type="video/mp4"></video><figcaption>Wind energy</figcaption></figure>
+      <figure class="movie-sequence" data-start="0"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
+      <figure class="movie-sequence" data-start="2"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
+      <figure class="movie-sequence" data-start="4"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
+      <figure class="movie-sequence" data-start="6"><div class="movie-stage"><video class="movie-frame is-active" muted playsinline preload="auto"></video><video class="movie-frame" muted playsinline preload="metadata"></video></div><figcaption><span class="caption-text is-active"></span><span class="caption-text"></span></figcaption></figure>
     </div>
   </div>
 </div>
@@ -106,9 +102,64 @@
   </footer>
 </main>
 <script>
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('video').forEach((video) => { video.pause(); video.removeAttribute('autoplay'); });
-  }
+  const stripMovies = [
+    ['strip-media/ATLAS1.mp4', 'ATLAS particle detector'],
+    ['strip-media/ArDMfinal.mp4', 'ArDM experiment'],
+    ['strip-media/Cryo.mp4', 'Cryogenic systems'],
+    ['strip-media/GasTurbine.mp4', 'Gas turbine technology'],
+    ['strip-media/RhB.mp4', 'Rhaetian Railway'],
+    ['strip-media/Sun.mp4', 'Solar energy'],
+    ['strip-media/TrainWheels.mp4', 'Rail-wheel dynamics'],
+    ['strip-media/WindTurbine.mp4', 'Wind energy']
+  ];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.movie-sequence').forEach((sequence) => {
+    const videos = sequence.querySelectorAll('.movie-frame');
+    const captions = sequence.querySelectorAll('.caption-text');
+    let currentMovie = Number(sequence.dataset.start);
+    let activeLayer = 0;
+    let transitioning = false;
+
+    const loadLayer = (layer, movie) => {
+      videos[layer].src = stripMovies[movie][0];
+      captions[layer].textContent = stripMovies[movie][1];
+      videos[layer].load();
+    };
+
+    const transitionToNext = () => {
+      if (transitioning || reduceMotion) return;
+      transitioning = true;
+      const nextLayer = 1 - activeLayer;
+      const oldLayer = activeLayer;
+      videos[nextLayer].currentTime = 0;
+      videos[nextLayer].play().catch(() => {});
+      videos[nextLayer].classList.add('is-active');
+      captions[nextLayer].classList.add('is-active');
+      videos[oldLayer].classList.remove('is-active');
+      captions[oldLayer].classList.remove('is-active');
+
+      window.setTimeout(() => {
+        videos[oldLayer].pause();
+        activeLayer = nextLayer;
+        currentMovie = (currentMovie + 1) % stripMovies.length;
+        loadLayer(oldLayer, (currentMovie + 1) % stripMovies.length);
+        transitioning = false;
+      }, 1000);
+    };
+
+    loadLayer(0, currentMovie);
+    loadLayer(1, (currentMovie + 1) % stripMovies.length);
+    if (!reduceMotion) {
+      videos[0].play().catch(() => {});
+      videos.forEach((video) => {
+        video.addEventListener('timeupdate', () => {
+          if (video === videos[activeLayer] && video.duration - video.currentTime <= 1.1) transitionToNext();
+        });
+        video.addEventListener('ended', transitionToNext);
+      });
+    }
+  });
 </script>
 </body>
 </html>
